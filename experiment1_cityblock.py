@@ -28,11 +28,11 @@ for i in range(k):
 for i in range(k):
 	for j in range(n):
 		if i != j:
-			if (dist.euclidean(a[i],a[j]) < temp_min[i]):
-				min_array[i] = dist.euclidean(a[i],a[j])
+			if (dist.cityblock(a[i],a[j]) < temp_min[i]):
+				min_array[i] = dist.cityblock(a[i],a[j])
 				temp_min[i] = min_array[i]
-			if (dist.euclidean(a[i],a[j]) > temp_max[i]):
-				max_array[i] = dist.euclidean(a[i],a[j])
+			if (dist.cityblock(a[i],a[j]) > temp_max[i]):
+				max_array[i] = dist.cityblock(a[i],a[j])
 				temp_max[i] = max_array[i]
 
 for i in range(k):
@@ -44,3 +44,4 @@ print "===================================================="
 print "[+] Max distances are:", max_array
 print "===================================================="
 print "[+] Ratios are: ", r
+

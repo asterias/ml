@@ -28,14 +28,15 @@ for i in range(k):
 	for j in range(k):
 		if i != j:
 			diff_array[i][j] = max(abs(np.subtract(a[i],a[j])))
-			#max_norm_max[i] = max(diff_array[i])
-			#max_norm_min[i] = min(diff_array[i])
+
+print "[+]Infinity Norm is: \n", diff_array
+print "==================================================================="
 
 for i in range(k):
 	sorted_diff_array[i] = sorted(diff_array[i])
 	max_norm_max[i] = sorted_diff_array[i][-1]
 	max_norm_min[i] = sorted_diff_array[i][1]
-print "[+] Sorted Diff Array is: \n", sorted_diff_array
+print "[+] Sorted Inifinity Norm Array is: \n", sorted_diff_array
 print "==================================================================="
 
 for i in range(k):
@@ -50,5 +51,8 @@ print "==================================================================="
 print "[+] Ratios are: \n", r
 print "==================================================================="
 print "[+] Average ratio is: ", np.mean(r)
+print "==================================================================="
+print "[+] Standard deviation of ratios is: ", np.std(r)
+print "==================================================================="
 
 

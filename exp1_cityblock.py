@@ -4,9 +4,9 @@ from scipy.spatial import distance as dist
 import random
 import sys
 
-k = 10
+k = 3
 n = 10
-s = (n,k)
+s = (k,n)
 
 a = np.zeros(s)
 
@@ -16,7 +16,9 @@ for i in range(k):
 	for j in range(n):
 		a[i][j] = random.random()
 
-print a
+print "[+] Matrix in use is: \n", a
+print "==================================================================="
+
 temp_max = np.zeros(k)
 temp_min = np.zeros(k)
 min_array = np.zeros(k)
@@ -26,7 +28,7 @@ for i in range(k):
 	temp_min[i] = sys.maxint
 	temp_max[i] = -1
 for i in range(k):
-	for j in range(n):
+	for j in range(k):
 		if i != j:
 			if (dist.cityblock(a[i],a[j]) < temp_min[i]):
 				min_array[i] = dist.cityblock(a[i],a[j])
@@ -39,10 +41,10 @@ for i in range(k):
 	r[i] = min_array[i]/max_array[i]
 
 
-print "[+] Min distances are: ", min_array
-print "===================================================="
-print "[+] Max distances are:", max_array
-print "===================================================="
-print "[+] Ratios are: ", r
-print "===================================================="
+print "[+] Min distances are: \n", min_array
+print "==================================================================="
+print "[+] Max distances are: \n", max_array
+print "==================================================================="
+print "[+] Ratios are: \n", r
+print "==================================================================="
 print "[+] Average ratio is: ", np.mean(r)

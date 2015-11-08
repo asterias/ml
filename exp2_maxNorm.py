@@ -10,7 +10,7 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 avg_ratios_list = []
 std_ratios_list = []
 for n in dimensions:
-	k = 100
+	k = 1000
 	s = (k,n)
 
 	a = np.zeros(s)
@@ -32,6 +32,8 @@ for n in dimensions:
 	r = np.zeros(k)
 	
 	normA = normalize(a, norm='l1')
+	#print "[+] Normalized Matrix in use is: \n", normA
+	#print "==================================================================="
 	
 	for i in range(k):
 		for j in range(k):

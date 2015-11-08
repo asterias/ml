@@ -7,8 +7,8 @@ import sys
 dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 
 for n in dimensions:
-	k = 5
-	m = 7
+	k = 50
+	m = 70
 	s = (k,n)
 	t = (m,n)
 
@@ -87,8 +87,12 @@ for n in dimensions:
 	yPertClasses = []
 	for i in range(m):
 		yPertClasses.append(xClass[min_pert_array[i]][-1])
-
+	
+	accuracy_array = np.subtract(yclasses, yPertClasses)
+	pct_accuracy = (float((len(accuracy_array)-np.count_nonzero(accuracy_array)))/len(accuracy_array))*100
 	print "[+] Perturbed Classes we assigned: \n", yPertClasses
+	print "==================================================================="
+	print "[!!] Accuracy: \n", pct_accuracy
 	print "*******************************************************************"
 	yPertClass = np.insert(yPert, n, yPertClasses, axis=1)
 	#print "[+] YPert Matrix Classes are: \n", yPertClass

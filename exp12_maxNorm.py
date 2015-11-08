@@ -8,7 +8,7 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 
 for n in dimensions:
 	k = 500
-	m = 700
+	m = 500
 	s = (k,n)
 	t = (m,n)
 
@@ -29,10 +29,6 @@ for n in dimensions:
 		for j in range(n):
 			y[i][j] = random.random()
 
-	#print "[+] X Matrix in use is: \n", x
-	#print "==================================================================="
-	#print "[+] Y Matrix in use is: \n", x
-	#print "==================================================================="
 	for i in range(k):
 		b.append(random.randint(0,1))
 
@@ -40,29 +36,16 @@ for n in dimensions:
 	#print "[+] X Matrix Classes are: \n", xClass
 	#print "==================================================================="
 
-	temp_min = np.zeros(m)
-	min_array = np.zeros(m)
-	min_pert_array = np.zeros(m)
-	temp_pert_min = np.zeros(m)
-
-	for i in range(m):
-		temp_min[i] = sys.maxint
-		temp_pert_min[i] = sys.maxint
-		
+	diff_array = np.zeros((m,k))
+	ind = np.zeros(m)	
 	for i in range(m):
 		for j in range(k):
-			if (dist.euclidean(y[i],x[j]) < temp_min[i]):
-				min_array[i] = j
-				temp_min[i] = dist.euclidean(y[i],x[j])
-
-
-	#print "[+] Closest points indices: \n", min_array
-	#print "==================================================================="
-
-
+			diff_array[i][j] = max(abs(np.subtract(y[i],x[j])))
+		ind[i] = np.argmin(diff_array[i])
+		
 	yclasses = []
 	for i in range(m):
-		yclasses.append(xClass[min_array[i]][-1])
+		yclasses.append(xClass[ind[i]][-1])
 
 	#print "[+] Real Classes we assigned: \n", yclasses
 	#print "==================================================================="
@@ -77,16 +60,17 @@ for n in dimensions:
 	ksi = np.random.normal(mean,sigma,t)
 
 	yPert = y + ksi
-
+	
+	diff_pert_array = np.zeros((m,k))
+	ind_pert = np.zeros(m)
 	for i in range(m):
 		for j in range(k):
-			if (dist.euclidean(yPert[i],x[j]) < temp_pert_min[i]):
-				min_pert_array[i] = j
-				temp_pert_min[i] = dist.euclidean(yPert[i],x[j])
-				
+			diff_pert_array[i][j] = max(abs(np.subtract(yPert[i],x[j])))
+		ind_pert[i] = np.argmin(diff_pert_array[i])
+
 	yPertClasses = []
 	for i in range(m):
-		yPertClasses.append(xClass[min_pert_array[i]][-1])
+		yPertClasses.append(xClass[ind_pert[i]][-1])
 	
 	accuracy_array = np.subtract(yclasses, yPertClasses)
 	pct_accuracy = (float((len(accuracy_array)-np.count_nonzero(accuracy_array)))/len(accuracy_array))*100

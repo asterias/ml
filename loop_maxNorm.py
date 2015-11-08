@@ -62,6 +62,7 @@ for n in dimensions:
 	std_ratios_list.append(np.std(r))
 print "###################################################################"
 print "The list of all average ratios is: \n", avg_ratios_list
+print "The list of all standard deviations of ratios is: \n", std_ratios_list
 print "###################################################################"
 
 #list_to_plot = zip(dimensions,avg_ratios_list)
@@ -71,5 +72,5 @@ plt.axis([0, 100, 0, 1])
 plt.errorbar(dimensions,avg_ratios_list, yerr = std_ratios_list, linestyle='none')
 plt.ylabel('Average of ratios')
 plt.xlabel('Dimensions')
-plt.title('Average ratios for K=100')
+plt.title('Average ratios for K=%d'%(k))
 plt.show()

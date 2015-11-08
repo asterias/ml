@@ -8,7 +8,7 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 
 for n in dimensions:
 	k = 500
-	m = 700
+	m = 100
 	s = (k,n)
 	t = (m,n)
 
@@ -51,9 +51,9 @@ for n in dimensions:
 		
 	for i in range(m):
 		for j in range(k):
-			if (dist.euclidean(y[i],x[j]) < temp_min[i]):
+			if (dist.cityblock(y[i],x[j]) < temp_min[i]):
 				min_array[i] = j
-				temp_min[i] = dist.euclidean(y[i],x[j])
+				temp_min[i] = dist.cityblock(y[i],x[j])
 
 
 	#print "[+] Closest points indices: \n", min_array
@@ -80,9 +80,9 @@ for n in dimensions:
 
 	for i in range(m):
 		for j in range(k):
-			if (dist.euclidean(yPert[i],x[j]) < temp_pert_min[i]):
+			if (dist.cityblock(yPert[i],x[j]) < temp_pert_min[i]):
 				min_pert_array[i] = j
-				temp_pert_min[i] = dist.euclidean(yPert[i],x[j])
+				temp_pert_min[i] = dist.cityblock(yPert[i],x[j])
 				
 	yPertClasses = []
 	for i in range(m):

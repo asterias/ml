@@ -1,14 +1,16 @@
 import time
 import numpy as np
 from scipy.spatial import distance as dist
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 import random
 import sys
 
 dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 
 for n in dimensions:
-	k = 500
-	m = 500
+	k = 100
+	m = 100
 	s = (k,n)
 	t = (m,n)
 
@@ -72,11 +74,15 @@ for n in dimensions:
 	for i in range(m):
 		yPertClasses.append(xClass[ind_pert[i]][-1])
 	
+	confMatrix = confusion_matrix(yclasses, yPertClasses)
+	
+	print "The confusion matrix is: \n", confMatrix
+	
 	accuracy_array = np.subtract(yclasses, yPertClasses)
-	pct_accuracy = (float((len(accuracy_array)-np.count_nonzero(accuracy_array)))/len(accuracy_array))*100
+	pct_accuracy = accuracy_score(yclasses,yPertClasses)*100
 	#print "[+] Perturbed Classes we assigned: \n", yPertClasses
 	#print "==================================================================="
-	print "[!!] Accuracy: \n", pct_accuracy
+	print "[!!] Accuracy: ", pct_accuracy
 	print "*******************************************************************"
 	print "*******************************************************************"
 	yPertClass = np.insert(yPert, n, yPertClasses, axis=1)

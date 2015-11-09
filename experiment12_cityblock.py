@@ -13,7 +13,7 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 pct_accuracy_array = []
 
 for n in dimensions:
-	sample_size = 500
+	sample_size = 2000
 	y_sample_size = 1000
 	s = (sample_size,n)
 	t = (y_sample_size,n)
@@ -78,7 +78,7 @@ for n in dimensions:
 	#print "==================================================================="
 
 	mean = 0.0
-	sigma = 0.05
+	sigma = 0.1
 
 	ksi = np.random.normal(mean,sigma,t)
 

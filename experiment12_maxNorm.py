@@ -10,8 +10,8 @@ import sys
 dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 pct_accuracy_array = []
 for n in dimensions:
-	k = 500
-	m = 1000
+	k = 1000
+	m = 2000
 	s = (k,n)
 	t = (m,n)
 

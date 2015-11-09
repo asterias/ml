@@ -9,7 +9,7 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 avg_ratios_list = []
 std_ratios_list = []
 for n in dimensions:
-	sample_size = 500
+	sample_size = 5000
 	s = (sample_size,n)
 
 	x_matrix = np.zeros(s)
@@ -58,13 +58,11 @@ for n in dimensions:
 	print "*******************************************************************"
 	avg_ratios_list.append(np.mean(ratios))
 	std_ratios_list.append(np.std(ratios))
-print "###################################################################"
-print "The list of all average ratios is: \n", avg_ratios_list
-print "The list of all standard deviations of ratios is: \n", std_ratios_list
-print "###################################################################"
-
-#list_to_plot = zip(dimensions,avg_ratios_list)
-#print "%% \n", list_to_plot, "\n %%"  
+#print "###################################################################"
+#print "The list of all average ratios is: \n", avg_ratios_list
+#print "The list of all standard deviations of ratios is: \n", std_ratios_list
+#print "###################################################################"
+ 
 plt.plot(dimensions,avg_ratios_list, 'ro')
 plt.axis([0, 100, 0, 1])
 plt.errorbar(dimensions,avg_ratios_list, yerr = std_ratios_list, linestyle='none')

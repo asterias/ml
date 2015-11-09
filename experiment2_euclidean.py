@@ -2,6 +2,7 @@ import time
 import numpy as np
 from scipy.spatial import distance as dist
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import normalize
 import random
 import sys
 
@@ -9,20 +10,24 @@ dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
 avg_ratios_list = []
 std_ratios_list = []
 for n in dimensions:
-	k = 100
+	k = 500
 	s = (k,n)
 
 	a = np.zeros(s)
 
 	random.seed(time.time())
+	
+	mean = 0.0
+	sigma = 1.0
 
 	for i in range(k):
 		for j in range(n):
-			a[i][j] = random.random()
+			a[i][j] = np.random.normal(mean,sigma)
 
 	#print "[+] Matrix in use is: \n", a
 	#print "==================================================================="
-
+	normA = normalize(a, norm='l1')
+	
 	temp_max = np.zeros(k)
 	temp_min = np.zeros(k)
 	min_array = np.zeros(k)
@@ -34,11 +39,11 @@ for n in dimensions:
 	for i in range(k):
 		for j in range(k):
 			if i != j:
-				if (dist.euclidean(a[i],a[j]) < temp_min[i]):
-					min_array[i] = dist.euclidean(a[i],a[j])
+				if (dist.euclidean(normA[i],normA[j]) < temp_min[i]):
+					min_array[i] = dist.euclidean(normA[i],normA[j])
 					temp_min[i] = min_array[i]
-				if (dist.euclidean(a[i],a[j]) > temp_max[i]):
-					max_array[i] = dist.euclidean(a[i],a[j])
+				if (dist.euclidean(normA[i],normA[j]) > temp_max[i]):
+					max_array[i] = dist.euclidean(normA[i],normA[j])
 					temp_max[i] = max_array[i]
 
 	for i in range(k):
@@ -58,13 +63,11 @@ for n in dimensions:
 	print "*******************************************************************"
 	avg_ratios_list.append(np.mean(r))
 	std_ratios_list.append(np.std(r))
-print "###################################################################"
-print "The list of all average ratios is: \n", avg_ratios_list
-print "The list of all standard deviations of ratios is: \n", std_ratios_list
-print "###################################################################"
+#print "###################################################################"
+#print "The list of all average ratios is: \n", avg_ratios_list
+#print "The list of all standard deviations of ratios is: \n", std_ratios_list
+#print "###################################################################"
 
-#list_to_plot = zip(dimensions,avg_ratios_list)
-#print "%% \n", list_to_plot, "\n %%"  
 plt.plot(dimensions,avg_ratios_list, 'ro')
 plt.axis([0, 100, 0, 1])
 plt.errorbar(dimensions,avg_ratios_list, yerr = std_ratios_list, linestyle='none')

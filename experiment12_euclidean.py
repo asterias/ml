@@ -3,14 +3,16 @@ import numpy as np
 from scipy.spatial import distance as dist
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
 import random
 import sys
 
 dimensions = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100]
+pct_accuracy_array = []
 
 for n in dimensions:
 	k = 500
-	m = 500
+	m = 1000
 	s = (k,n)
 	t = (m,n)
 
@@ -96,6 +98,7 @@ for n in dimensions:
 	
 	accuracy_array = np.subtract(yclasses, yPertClasses)
 	pct_accuracy = accuracy_score(yclasses,yPertClasses)*100
+	pct_accuracy_array.append(pct_accuracy)
 	#print "[+] Perturbed Classes we assigned: \n", yPertClasses
 	#print "==================================================================="
 	print "[!!] Accuracy: ", pct_accuracy
@@ -104,3 +107,10 @@ for n in dimensions:
 	yPertClass = np.insert(yPert, n, yPertClasses, axis=1)
 	#print "[+] YPert Matrix Classes are: \n", yPertClass
 	#print "==================================================================="
+
+plt.plot(dimensions,pct_accuracy_array, 'ro')
+plt.axis([0, 100, 0, 100])
+plt.ylabel('Accuracy')
+plt.xlabel('Dimensions')
+plt.title('Accuracy for K=%d and M=%d'%(k,m))
+plt.show()

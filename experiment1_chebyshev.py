@@ -1,3 +1,5 @@
+# Uncomment "print" lines for debugging
+
 import time
 import numpy as np
 from scipy.spatial import distance as dist
